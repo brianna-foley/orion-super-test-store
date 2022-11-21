@@ -1,0 +1,46 @@
+<div data-component-sideCart data-count="0"  data-active="false" class="side-cart">
+  <form  class="cart__contents critical-hidden" method="post" id="cart">
+  <button class="side-cart_closeButton" data-component-closeSideCartButton data-action-closeSideCart >x</button>
+  <section data-component-cartItems >
+    {% for item in cart.items %}
+      <article data-variantId="{{item.id}}" data-component-cartItem class="side-cart-item">
+          <div class="side-cart_itemTitle" >
+              {{item.title}}
+          </div>
+          <div class="side-cart_itemPrice">
+              {{item.price | money }}
+          </div>
+          <img src="{{ item.image | img_url: '230x230' }}" alt="{{item.image.alt}}" class="side-cart_itemImage">
+          <div data-component-itemQuantitySelector data-id="{{ item.id }}" class="side-cart_itemQuantity">
+              <a href="javascript:void(0)" data-component-itemQuantityPlus class="side-cart_itemQuantity-plus">
+                  +
+              </a>
+              <span href="javascript:void(0)" data-component-itemQuantityDisplay class="side-cart_itemQuantity-quantity">
+                  {{item.quantity}}
+              </span>
+              <a href="javascript:void(0)"   data-component-itemQuantityminus class="side-cart_itemQuantity-minus">
+                  -
+              </a>
+
+          </div>
+      </article>
+  {% endfor %}
+  </section>
+<section>
+  <span>total:</span>
+  <span data-component-total >{{cart.total_price | money}}</span>
+</section>
+
+  </form>
+</div> 
+
+{{ 'side-cart.css' | asset_url | stylesheet_tag }}
+
+
+{% schema %}
+{
+  "name": "sideCart",
+  "class": "sideCart",
+  "settings": []
+}
+{% endschema %}

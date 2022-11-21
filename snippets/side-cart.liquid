@@ -1,0 +1,31 @@
+<div data-component-sideCart data-active="false" class="side-cart">
+    <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
+    <button class="side-cart_closeButton" data-component-closeSideCartButton data-action-closeSideCart >x</button>
+    {% for item in cart.items %}
+        <div data-variantId="{{item.id}}" data-component-cartItem class="side-cart-item">
+            <div class="side-cart_itemTitle" >
+                {{item.title}}
+            </div>
+            <div class="side-cart_itemPrice">
+                {{item.price | money }}
+            </div>
+            <img src="{{ item.image | img_url: '230x230' }}" alt="{{item.image.alt}}" class="side-cart_itemImage">
+            <div data-component-itemQuantitySelector data-id="{{ item.id }}" class="side-cart_itemQuantity">
+                <a data-component-itemQuantityPlus class="side-cart_itemQuantity-plus">
+                    +
+                </a>
+                <div data-component-itemQuantityDisplay class="side-cart_itemQuantity-quantity">
+                    {{item.quantity}}
+                </div>
+                <a  data-component-itemQuantityminus class="side-cart_itemQuantity-minus">
+                    -
+                </a>
+
+            </div>
+        </div>
+    {% endfor %}
+    </form>
+</div> 
+
+{{ 'side-cart.css' | asset_url | stylesheet_tag }}
+ 
